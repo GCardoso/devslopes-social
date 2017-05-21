@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SignInVC: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var passwordTxtFld: UITextField!
+    @IBOutlet weak var emailTxtField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        passwordTxtFld.delegate = self
+        emailTxtField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +25,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.emailTxtField.resignFirstResponder()
+        self.passwordTxtFld.resignFirstResponder()
+        return true
+    }
 }
 
