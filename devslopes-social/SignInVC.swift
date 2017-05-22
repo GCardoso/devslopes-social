@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FacebookLogin
+import FacebookCore
 
 class SignInVC: UIViewController, UITextFieldDelegate {
 
@@ -19,16 +25,42 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         passwordTxtFld.delegate = self
         emailTxtField.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.emailTxtField.resignFirstResponder()
         self.passwordTxtFld.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func facebookSignInPressed(_ sender: UIButton) {
+        print("pressed")
+        let loginManager = LoginManager()
+        loginManager.logIn([ .publicProfile ], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
+                print("Error from FACEBOOK Auth")
+                print(error.localizedDescription)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: accessToken.authenticationToken)
+                self.firebaseAuth(credential)
+                
+            }
+        }
+    }
+    
+    func firebaseAuth(_ credential: FIRAuthCredential) {
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                print(error.debugDescription)
+                print("UNABLE TO AUTHENTICATE WITH FIREBASE")
+            } else {
+                print("AUTHENTICATEd WITH FIREBASE!")
+            }
+            
+        })
     }
 }
 
