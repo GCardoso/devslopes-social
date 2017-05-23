@@ -51,6 +51,42 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func signInTapped(_ sender: UIButton) {
+        if let email = emailTxtField.text, let pwd = passwordTxtFld.text {
+            FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                
+                if let error = error as? NSError {
+                    if let errCode = FIRAuthErrorCode(rawValue: error.code) {
+                        switch errCode {
+                        case .errorCodeWeakPassword:
+                            //handle weak password
+                            print("MYRIUM: Email user unable to authenticate with Firebase using email, weak password")
+                            break
+                        case .errorCodeInvalidEmail: break
+                        case .errorCodeUserNotFound:
+                            FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
+                                if error != nil {
+                                    print("MYRIUM: Email user unable to authenticate with Firebase using email")
+                                } else{
+                                    print("MYRIUM: Email user authenticated with Firebase using email")
+                                    
+                                }
+                            })
+                            break;
+                        default: break
+//                            self.printError(error: error, stage: "User creation unsuccesfull")
+                        }
+                    }
+                    print("MYRIUM: Email user unable to authenticate with Firebase")
+                } else {
+                    print("MYRIUM: Email user authenticated with irebase.")
+                }
+            })
+        } else {
+            
+        }
+    }
+    
     func firebaseAuth(_ credential: FIRAuthCredential) {
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
