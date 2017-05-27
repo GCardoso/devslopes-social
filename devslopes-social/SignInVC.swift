@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import FacebookLogin
 import FacebookCore
+import SwiftKeychainWrapper
 
 class SignInVC: UIViewController, UITextFieldDelegate {
 
@@ -22,8 +23,17 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         passwordTxtFld.delegate = self
         emailTxtField.delegate = self
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("MYRIUM: ID found in keychain")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -62,19 +72,19 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                             //handle weak password
                             print("MYRIUM: Email user unable to authenticate with Firebase using email, weak password")
                             break
-                        case .errorCodeInvalidEmail: break
+                        case .errorCodeInvalidEmail:
+                            break
                         case .errorCodeUserNotFound:
                             FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
                                 if error != nil {
                                     print("MYRIUM: Email user unable to authenticate with Firebase using email")
                                 } else{
                                     print("MYRIUM: Email user authenticated with Firebase using email")
-                                    
+                                    self.completeSignIn(id: (user?.uid)!)
                                 }
                             })
                             break;
                         default: break
-//                            self.printError(error: error, stage: "User creation unsuccesfull")
                         }
                     }
                     print("MYRIUM: Email user unable to authenticate with Firebase")
@@ -94,9 +104,20 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                 print("UNABLE TO AUTHENTICATE WITH FIREBASE")
             } else {
                 print("AUTHENTICATEd WITH FIREBASE!")
+                if let user = user {
+                    self.completeSignIn(id: user.uid)
+                }
             }
             
         })
     }
+    func completeSignIn(id: String) {
+        let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("Myrium: Data saved to keychain \(keychainResult)")
+        if (keychainResult) {
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+        }
+    }
+    
 }
 
