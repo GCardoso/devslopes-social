@@ -15,6 +15,7 @@
 		694117981ED1E84400D1280B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694117971ED1E84400D1280B /* RoundButton.swift */; };
 		6941179A1ED1EAA700D1280B /* FancyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694117991ED1EAA700D1280B /* FancyField.swift */; };
 		6941179C1ED1EBE400D1280B /* FancyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6941179B1ED1EBE400D1280B /* FancyBtn.swift */; };
+		695473421EDB981300EAF579 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 695473411EDB981300EAF579 /* CircleView.swift */; };
 		698B762A1ECE63B500715208 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698B76291ECE63B500715208 /* AppDelegate.swift */; };
 		698B762C1ECE63B500715208 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698B762B1ECE63B500715208 /* SignInVC.swift */; };
 		698B762F1ECE63B500715208 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698B762D1ECE63B500715208 /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 		694117971ED1E84400D1280B /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		694117991ED1EAA700D1280B /* FancyField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyField.swift; sourceTree = "<group>"; };
 		6941179B1ED1EBE400D1280B /* FancyBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
+		695473411EDB981300EAF579 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		698B76261ECE63B500715208 /* devslopes-social.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "devslopes-social.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		698B76291ECE63B500715208 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698B762B1ECE63B500715208 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				694117971ED1E84400D1280B /* RoundButton.swift */,
 				694117991ED1EAA700D1280B /* FancyField.swift */,
 				6941179B1ED1EBE400D1280B /* FancyBtn.swift */,
+				695473411EDB981300EAF579 /* CircleView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				698B762C1ECE63B500715208 /* SignInVC.swift in Sources */,
 				698B762A1ECE63B500715208 /* AppDelegate.swift in Sources */,
 				694117931ED1E2C800D1280B /* FancyView.swift in Sources */,
+				695473421EDB981300EAF579 /* CircleView.swift in Sources */,
 				6941179A1ED1EAA700D1280B /* FancyField.swift in Sources */,
 				6941179C1ED1EBE400D1280B /* FancyBtn.swift in Sources */,
 				698B76321ECE63B500715208 /* devslopes_social.xcdatamodeld in Sources */,
